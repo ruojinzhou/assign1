@@ -5,10 +5,6 @@
 	<style>	
 		/*write your css rules here*/
 		
-		textarea {
-		  width:100%;
-		}
-
 		li {
 			font-size: 30px;
 		}
@@ -26,19 +22,15 @@
 			display: none;
 		}
 		
-		.li {
-			font-size: 24px;
-		}
-		
-		.li: nth-child(3n) {
+		li: nth-child(3n) {
 			color: #f44336;
 		}
 		
-		.li: nth-child(3n+1) {
+		li: nth-child(3n+1) {
 			color: #555555;
 		}
 			
-		.li: nth-child(3n+2) {
+		li: nth-child(3n+2) {
 			color: #e7e7e7;
 		}
 		
@@ -82,7 +74,7 @@
 	// write your Javascript here		
 	const text = document.getElementById("text");
 	const orderList = document.getElementById("order_list");
-	let conceal = True;		
+	let conceal = False;		
 	function lineThrough() {
 		if (this.classList.contains("checked") === False) {
 			this.classList.add("checked");
@@ -112,9 +104,9 @@
 	function toggle() {
 		conceal = !conceal
 		for let (each of orderList.childern) {
-			if (!conceal && each.classList.contains("checked")) {
+			if (conceal && each.classList.contains("checked")) {
 				each.style = "display: none";
-			} else if (conceal && each.classList.contains("checked")) {
+			} else if (!conceal && each.classList.contains("checked")) {
 				each.style = "display: list-item";
 			}
 		}

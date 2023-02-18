@@ -80,9 +80,9 @@
 
 	<script>
 		// write your Javascript here		
-		const text = document.getElementById("text")
-		const orderList = document.getElementById("order_list")
-		conceal = True
+		const text = document.getElementById("text");
+		const orderList = document.getElementById("order_list");
+		let conceal = True;
 		
 		function lineThrough() {
 			if (this.classList.contains("checked") === True) {
@@ -99,8 +99,8 @@
 		}
 			
 		function newElement() {
-			let new = text.value.split(";");
-			for (let each of new) {
+			let newItem = text.value.split(";");
+			for (let each of newItem) {
 				let item = each.split(",");
 			        let incident = document.createElement("li");
 			        incident.innerHTML = item[0];

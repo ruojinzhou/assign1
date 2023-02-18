@@ -72,7 +72,7 @@
 
 <script>
 	// write your Javascript here		
-	const text = document.getElementById("text");
+	const inputText = document.getElementById("text");
 	const orderList = document.getElementById("order_list");
 	let conceal = False;		
 	function lineThrough() {
@@ -84,20 +84,20 @@
 	}
 		
 	function strikeOut() {
-		if (confirm("Are you true to delete this line?")) {
+		if (confirm("Are you sure to delete this line?")) {
 			this.remove();
 		}
 	}
 			
 	function insertText() {
-		let newItem = text.value.split(";");
+		let newItem = inputText.value.split(";");
 		for (let each of newItem) {
 			let item = each.split(",");
 			let incident = document.createElement("li");
 		        incident.innerHTML = item[0];
 		        incident.onclick = lineThrough;
 			incident.ondblclick = strikeOut;
-			orderList.insertBefore(incident, orderList.childern[parseInt(item[1] - 1]);
+			orderList.insertBefore(incident, orderList.children[parseInt(item[1]) - 1]);
 		}
 	}
 		

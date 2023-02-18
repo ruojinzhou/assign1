@@ -9,6 +9,10 @@
 			font-size: 30px;
 		}
 		
+		.block {
+			display: block;
+		}
+		
 		.header {
 			margin: auto;
 			width: 80%;
@@ -56,9 +60,11 @@
 
 <body>
 	<div id="myDIV" class="header">
-		<h2>To Do List</h2>
-		<p>Please enter the to do list by "content, category"; press "toggle" to hide the completed events</p>
-		<textarea id='text' rows="3" >Lecture preparation: cloud computing, 1; Dinner with Prof. Wong, 2; Walk my dog, 3; Lecture preparation: probability, 4;</textarea> 
+		<label class="block">
+			<h2>To Do List</h2>
+			<p>Please enter the to do list by "content, category"; press "toggle" to hide the completed events</p>
+			<textarea id='text' rows="3" >Lecture preparation: cloud computing, 1; Dinner with Prof. Wong, 2; Walk my dog, 3; Lecture preparation: probability, 4;</textarea> 
+		</label>
 		<br>
 		<div class='divButton'>
 		<button id='btn_add', onclick='insertText()'>Add</button>

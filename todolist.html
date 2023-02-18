@@ -1,0 +1,177 @@
+<html lang="en">
+<!-- feel free to revise this file -->
+
+<head>
+	<style>	
+		/*write your css rules here*/
+		body {
+		    background-color: #F0F8FF;
+		}
+		
+		li {
+			font-size: 30px;
+		}
+		
+		.block {
+			display: block;
+		}
+		
+		h2 {
+		    text-align: center;
+			
+		}
+		
+		p {
+		    font-family: verdana;
+			font-size: 12px;
+		}
+		
+		#text {
+		    background-color: #e7e7e7;
+			border-radius: 8px;
+			border-style: hidden;
+		}
+		
+		.header {
+			margin: auto;
+			width: 80%;
+		}
+		
+        .expand {
+		    margin: auto;
+			width: 100%;
+		}
+		
+		.checked {
+			text-decoration: line-through;
+		}
+		
+		.conceal {
+			display: none;
+		}
+		
+		li:nth-child(3n) {
+			color: #f44336;
+		}
+		
+		li:nth-child(3n+1) {
+			color: #555555;
+		}
+			
+		li:nth-child(3n+2) {
+			color: #e7e7e7;
+		}
+		
+		button#btn_add {
+			font-size: 12px;
+			background-color: white;
+			color: #e7e7e7;
+			padding: 12px 40px;
+			border-radius: 8px;
+			border: 2px solid #e7e7e7;
+			text-align: center;
+			float: left;
+			margin-left: 100px;
+			text-decoration: none;
+			transition-duration: 0.4s;
+			font-family: verdana;
+		}
+		
+		button#btn_hide {
+			font-size: 12px;
+			background-color: white;
+			color: #e7e7e7;
+			padding: 12px 40px;
+			border-radius: 8px;
+			border: 2px solid #e7e7e7;
+			text-align: center;
+			float: right;
+			margin-right: 100px;
+			text-decoration: none;
+			transition-duration: 0.4s;
+			font-family: verdana;
+		}
+		
+		button:hover#btn_add {
+			background-color: #e7e7e7;
+			color: white;
+		}
+		
+		button:hover#btn_hide {
+			background-color: #e7e7e7;
+			color: white;
+		}
+		
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		<label class="block">
+			<h2>To Do List</h2>
+			<p>Please enter the to do list by "content, category"; press "toggle" to hide the completed events</p>
+			<textarea id='text' class='expand' rows="3">Lecture preparation: cloud computing, 1; Dinner with Prof. Wong, 2; Walk my dog, 3; Lecture preparation: probability, 4;</textarea> 
+		</label>
+	</div>
+	<br>
+	<div class="header">
+		<div class='expand'>
+		<button id='btn_add' onclick='insertText()'>Add</button>
+		<button id='btn_hide' onclick='toggleText()'>Toggle</button>
+		</div>
+	</div>
+	<br>
+	<br>
+	<div class="header">
+	    <ol id='order_list'>
+	    </ol>
+	</div>
+</body>
+
+<script>
+	// write your Javascript here		
+	const inputText = document.getElementById("text");
+    const orderList = document.getElementById("order_list");
+	let conceal = true;		
+ 	function lineThrough() {
+ 		if (this.classList.contains("checked") === false) {
+			this.classList.add("checked");
+		} else {
+			this.classList.remove("checked");
+		}
+	}
+		
+	function strikeOut() {
+ 		if (confirm("Are you sure to delete this line?")) {
+ 			this.remove();
+ 		}
+ 	}
+			
+	function insertText() {
+		let newItem = inputText.value.split(";");
+		for (let each of newItem) {
+		if (each.trim() === "") {
+		continue
+		}
+			let item = each.split(",");
+		    let incident = document.createElement("li");
+		    incident.innerHTML = item[0];
+		    incident.onclick = lineThrough;
+			incident.ondblclick = strikeOut;
+			orderList.insertBefore(incident, orderList.children[parseInt(item[1]) - 1]);
+		}
+	}
+		
+ 	function toggleText() {
+ 		conceal = !conceal;
+ 		for (let each of orderList.children) {
+ 			if (!conceal && each.classList.contains("checked")) {
+ 				each.classList.add("conceal");
+ 			} else if (conceal && each.classList.contains("checked")) {
+ 				each.classList.remove("conceal");
+ 			}
+ 		}
+ 	}
+		
+</script>
+</html>

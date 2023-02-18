@@ -13,27 +13,84 @@
 			font-size: 30px;
 		}
 		
-		ol#li.checked{
+		.header {
+			margin: auto;
+			width: 80%;
+		}
+					
+		.checked {
 			text-decoration: line-through;
 		}
 		
+		.conceal {
+			display: none;
+		}
+		
+		.li {
+			font-size: 24px;
+		}
+		
+		.li: nth-child(3n) {
+			color: #f44336;
+		}
+		
+		.li: nth-child(3n+1) {
+			color: #555555;
+		}
+			
+		.li: nth-child(3n+2) {
+			color: #e7e7e7;
+		}
+		
+		.button#btn_add {
+			font-size: 12px;
+			color: #555555;
+			padding: 12px;
+			border: 2px solid #e7e7e7;
+			border-radius: 8px;
+			text-align: center;
+			text-decoration: none;
+			transition-duration: 0.4s;
+		}
+		
+		.botton: hover#btn_add {
+			background-color: #e7e7e7;
+			color: white;
+		}
+		
+		.button#btn_hide {
+			font-size: 12px;
+			color: #555555;
+			padding: 12px;
+			border: 2px solid #008CBA;
+			border-radius: 8px;
+			text-align: center;
+			text-decoration: none;
+			transition-duration: 0.4s;
+		}
+		
+		.botton: hover#btn_hide {
+			background-color: #008CBA;
+			color: white;
+		}		
+			
 		
 	</style>
 </head>
 
 <body>
-	<textarea id='text' rows="3" >Dinner, 1; Exercise, 2; Study, 3</textarea> 
-	<br/>
-	<div class='divButton'>
-		<button id='btn_add'>Add</button>
-		<button id='btn_hide'>Toggle</button>
+	<div id="myDIV" class="header">
+		<h2>To Do List</h2>
+		<p>Please enter the to do list by "content, category"; press "toggle" to hide the completed events</p>
+		<textarea id='text' rows="3" >Lecture preparation: cloud computing, 1; Dinner with Prof. Wong, 2; Walk my dog, 3; Lecture preparation: probability, 4;</textarea> 
+		<br>
+		<div class='divButton'>
+		<button id='btn_add', onclick='newElement'>Add</button>
+		<button id='btn_hide', onclick='toggle()'>Toggle</button>
+		</div>
 	</div>
 
 	<ol id='order_list'>
-		<li class = "checked">Lecture preparation: cloud computing</li>
-		<li class = "checked">Dinner with Prof.Wong</li>
-		<li>walk my dog</li>
-		<li>Lecture preparation: probability</li>
 	</ol>	
 </body>
 
@@ -41,7 +98,22 @@
 		// write your Javascript here		
 		const text = document.getElementById("text")
 		const orderList = document.getElementById("order_list")
+		conceal = True
 		
+		function lineThrough() {
+			if (this.classList.contains("checked") === True) {
+				this.classList.remove("checked");
+			} else {
+				this.classList.add("checked");
+			}
+		}
+		
+		function strikeOut() {
+			if (confirm("Are you true to delete this line?")) {
+				this.remove();
+			}
+		}
+			
 		function newElement() {
 			let new = text.value.split(";");
 			for (let each of new) {
@@ -49,32 +121,18 @@
 			        let incident = document.createElement("li");
 			        incident.innerHTML = item[0];
 			        incident.onclick = lineThrough;
-				incident.ondblclick = delete;
+				incident.ondblclick = strikeOut;
 				orderList.insertBefore(incident, orderList.childern[parseInt(item[1] - 1]);
 			}
 		}
 		
-		
-			var li = document.createElement("li");
-			var inputValue = document.getElementById("btn_add").value;
-			var t = document.createTextNode(inputValue);
-			li.appendChild(t);
-			if (inputValue === '') {
-				alert("Please write something.");
-			} else {
-				document.getElementById("order_list").appendChild(li);
-			}
-			document.getElementById("btn_add").value = "";
-			
-			var span = document.createElement("SPAN");
-			var txt = document.createTextNode("\u00D7");
-			span.ClassName = "close"
-			span.appendChild(span);
-			
-			for (i = 0; i < delete.length; i++) {
-				delete[i].dblclick = function() {
-					var div = this.parentElement;
-					div.style.display = "none";
+		function toggle() {
+			conceal = !conceal
+			for let (each of orderList.childern) {
+				if (!conceal && each.classList.contains("checked")) {
+					each.style = "display: none";
+				} else if (conceal && each.classList.contains("checked")) {
+					each.style = "display: list-item";
 				}
 			}
 		}
